@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGA FORTECH || Desenvolvimento FrontEnd</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- boxicon css link -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+</head>
+<body>
+    <div class="overlay"></div>
+    <header>
+        <a href="#" class="logo"><span>LGA</span> FORTECH</a>
+        <ul class="navlist">
+            <li><a href="#home" class="active">Início</a></li>
+            <li><a href="#about">Coordenação</a></li>
+            <li><a href="#services">Nossos Serviços</a></li>
+            <li><a href="#proposal">Contato</a></li>
+            <!-- <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#blog">Blog</a></li> -->
+            
+        </ul>
+        <div class="right-header">
+            <a href="https://wa.me/5534998972575?text=Ol%C3%A1%2C%20Quero%20fazer%20um%20or%C3%A7amento!%20" target="_blank" class="btn">Vamos Conversar! <i class='bx bx-message-dots' ></i></a>
+            <div class="menu-icon">
+                <div class="bar"></div>
+            </div>
+        </div>
+
+    </header>
+
+    <section class="home" id="home">
+        <div class="hero-info">
+            <div style="margin-top: -40px;">
+
+            <!-- <img class="logo" style="top: 0px; border-radius: 50%; width: 150px; height: 150px; bottom: 20px;" src="./img/logo.png" alt=""> -->
+            </div>
+            
+            <h3 style="font-weight: 500;">Seja Bem-Vindo(a)!</h3>
+            <br/>
+            <h2>Sobre Nós</h2>
+            <h2 style="font-size: 40px;">Olá, Eu sou Guilherme Almeida</h2>
+
+            <div class="text-animate">
+                <h2>Desenvolvedor FrontEnd</h2>
+            </div >
+            <p style="font-weight: 600;">Sou Guilherme Almeida, Uberlandense, trabalhando Profissionalmente em Telecomunicações - Desde 2012 
+                para uma Grande Operadora do Brasil. Graduado em Análise e Desenvolvimento de Sistemas e possuo vários 
+                cursos de extensão na área de Programação. Apaixonado por programação. Atuo na área de T.I. desde os 17 anos de idade,
+                 longa experiência em manutenção de Hardware e Software.</p>
+
+            <div class="btn-box">
+                <a href="https://wa.me/5534998972575?text=Ol%C3%A1%2C%20Quero%20fazer%20um%20or%C3%A7amento!%20" class="btn" style="height: 40px; width: 340px; right: 70px;">Fale Conosco! <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                    <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                  </svg><i class='bx bx-right-arrow-alt' ></i></a>
+                  <div style="margin-left: 30px; width: 200px;">
+    <a href="https://www.instagram.com/lgafortech/" target="_blank" class="btn" style="height: 40px; width: 170px; ">Siga-nos!<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+      </svg> <i class='bx bx-right-arrow-alt' ></i></a>
+            </div>
+
+
+                  </div>
+            <!-- <div class="social-media">
+                <div class="bg-icon">
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                    <span></span>
+                </div>
+
+                <div class="bg-icon">
+                    <a href="#"><i class='bx bxl-github'></i></a>
+                    <span></span>
+                </div>
+
+                <div class="bg-icon">
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <span></span>
+                </div>
+
+                <div class="bg-icon">
+                    <a href="#"><i class='bx bxl-facebook'></i></a>
+                    <span></span>
+                </div> -->
+            </div>
+        </div>
+        <div class="img-hero">
+            <img src="img/hero.jpeg" style="border-radius: 70%; width: 420px; height: 420px; margin-top: 60px; margin-left: -10px;" alt="">
+            <div class="rotate-text">
+                <div class="text">
+                    <p>Desenvolvedor FRONT-END</p>
+                </div>
+                <span><i></i></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="img/aboutMe.jpeg" alt="" style="border-radius: 20px; width: 350px; height: 400px;" class="aboutHero">
+            <div class="showcase-ring">
+                <img src="shapes/ring.png" class="ring">
+                <img src="shapes/circle.png" class="circle">
+            </div>
+        </div>
+        <div class="about-content">
+            <h2 class="heading" style="font-size: 34px;">Olá, sou Layla Almeida</h2>
+            <h3>Coordenadora de Projetos</h3>
+            <p style="font-weight: 600;">Sou Layla Almeida, casada com o Guilherme desde 2010. Graduada em Gestão em Recursos Humanos, possuo experiência há mais de 15 anos em área administrativa.
+                Juntos atuamos para oferecer o melhor atendimento e projeto para sua empresa.
+                </p>
+            <!-- <div class="about-btn">
+                <button class="active">Main Skills</button>
+                <button>Awards</button>
+                <button>Education</button>
+            </div>
+            <div class="content-btn">
+                <div class="content">
+                    <div class="text-box">
+                    <p>User Experience Design - UI / UX</p>
+                    <span>Delight the user and make it work.</span>
+                </div>
+                <div class="text-box">
+                    <p>Web & User Interface Design - Development</p>
+                    <span>Website , Web Experience , ...</span>
+                </div>
+                <div class="text-box">
+                    <p>Interaction Desing - Animation</p>
+                    <span>I Like to move it move it</span>
+                </div>
+                </div>
+
+                <div class="content">
+                    <div class="text-box">
+                    <p>Web Design Award</p>
+                    <span>Award for creativity and user experience.</span>
+                </div>
+                <div class="text-box">
+                    <p>Code and Development Award</p>
+                    <span>Exceptional coding skills and develoment techniques</span>
+                </div>
+                <div class="text-box">
+                    <p>Hackathons and coding Competiotions</p>
+                    <span>Participating in hackathons and coding.</span>
+                </div>
+                </div>
+
+
+                <div class="content">
+                    <div class="text-box">
+                    <p>Online Courses and Bootcamps</p>
+                    <span>Delight the user and make it work.</span>
+                </div>
+                <div class="text-box">
+                    <p>Internships and Work Experience</p>
+                    <span>Website , Web Experience , ...</span>
+                </div>
+                <div class="text-box">
+                    <p>Bachelor's Degree in Computer Science</p>
+                    <span>I Like to move it move it</span>
+                </div>
+                </div>
+            </div>
+            <div class="cvContent">
+                <a href="img/resume.pdf" target="_blank" class="btn d-CV">Download CV <i class='bx bx-download'></i></a>
+            </div>
+        </div> -->
+    </section>
+
+    <section class="services" id="services">
+        <div class="main-text">
+            <h2 class="heading" style="margin-top: 30px;">Nossos Serviços</h2>
+            <span style="font-weight: 500;">O Que Faremos para Você!</span>
+        </div>
+        <div>
+            <span style="font-weight: 500;">Nós Criamos com Programação de Alto Nível seu Projeto de forma Artesanal e não em série, sim Feitos a Mão esse é o Nosso Slogan!</span>
+        </div>
+
+        <div class="allServices">
+            <div class="servicesItem">
+                <div class="icon-services">
+                    <i class='bx bx-layer' ></i>
+                    <span></span>
+                </div>
+                <h3>Site Institucional</h3>
+                <p style="font-weight: 700;">Criamos Seu Site com Apresentação da Sua Empresa, Seus Produtos, Serviços, Objetivos, Localização, entre outros.</p>
+                <a class="readMore"></a>
+            </div>
+
+            <div class="servicesItem">
+                <div class="icon-services">
+                    <i class='bx bx-code-alt' ></i>
+                    <span></span>
+                </div>
+                <h3>Landing Page</h3>
+                <p style="font-weight: 700;">Criamos sua Landing Page para Converter Visitantes em Clientes. 
+                    O Objetivo é que o Visitante Realize uma ação Específica como Preencher um Formulário
+                     ou se Inscrever para um Evento!</p>
+                <!-- <a href="#" class="readMore">Read More</a> -->
+            </div>
+
+            <div class="servicesItem">
+                <div class="icon-services">
+                    <i class='bx bx-desktop' ></i>
+                    <span></span>
+                </div>
+                <h3>Domínio</h3>
+                <p style="font-weight: 700;">Fazemos o Registro do seu Domínio, que é o Endereço Online que identifica o Site na Internet. Exemplo: www.suaempresa.com.br</p>
+                <!-- <a href="#" class="readMore">Read More</a> -->
+            </div>
+
+            <div class="servicesItem">
+                <div class="icon-services">
+                    <i class='bx bxs-party' ></i>
+                    <span></span>
+                </div>
+                <h3>Hospedagem</h3>
+                <p style="font-weight: 700;">Fazemos a Hospedagem do Seu Site, que é o serviço que Disponiabiliza um Espaço em um Servidor
+                    para Armazenar e Entregar o Seu Site na Internet, para Mantê-lo
+                    Online 24 Horas.
+                </p>
+                <!-- <a href="#" class="readMore">Read More</a> -->
+            </div>
+
+        </div>
+
+        <div class="showcase">
+            <img src="shapes/ring.png" class="ring">
+            <img src="shapes/circle.png" class="circle">
+            <img src="shapes/circle.png" class="circle2">
+            <img src="shapes/circle.png" class="circle3">
+            <img src="shapes/half-ring.png" class="half-ring">
+        </div>
+    </section>
+        <div style="top: 50px;" class="" id="proposal">
+            <div class="text-box">
+                <span style="margin-left: 30px; margin-bottom: 20px;">Comece seu Projeto!</span>
+                <h3 style="margin-bottom: 50px;margin-left: 30px;">Você tem Um Projeto em Mente?</h3>
+                <a style="margin-left: 30px;" href="https://wa.me/5534998972575?text=Ol%C3%A1%2C%20Quero%20fazer%20um%20or%C3%A7amento!%20" target="_blank" class="btn">Faça seu Orçamento!</a>
+            </div>
+            <img src="img/support.png" style="width: 300px; he: 300px; margin-left: 100px;" class="first">
+        </div>
+
+
+     <!-- <section class="portfolio" id="portfolio">
+        <div class="main-text">
+            <h2 class="heading">My Services</h2>
+            <span>what i will do for you</span>
+        </div>
+        <div class="fillter-buttons">
+            <button class="button mixitup-control-active" data-filter="all">All Work</button>
+            <button class="button" data-filter=".web">Web Development</button>
+            <button class="button" data-filter=".uiux">UI/UX Design</button>
+            <button class="button" data-filter=".branding">Branding Design</button>
+        </div>
+
+        <div class="portfolio-gallery">
+            <div class="portfolio-box mix uiux">
+                <div class="portfolio-content">
+                    <h3>UI/UX Design</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, soluta.</p>
+                    <a href="#" class="readMore">Explore More</a>
+                </div>
+                <div class="portfolio-img">
+                    <img src="img/portfolio/1.jpg" alt="">
+                </div>
+            </div>
+
+            <div class="portfolio-box mix web">
+                <div class="portfolio-content">
+                    <h3>Web Design</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, soluta.</p>
+                    <a href="#" class="readMore">Explore More</a>
+                </div>
+                <div class="portfolio-img">
+                    <img src="img/portfolio/2.jpg" alt="">
+                </div>
+            </div>
+
+            <div class="portfolio-box mix web">
+                <div class="portfolio-content">
+                    <h3>Web Development</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, soluta.</p>
+                    <a href="#" class="readMore">Explore More</a>
+                </div>
+                <div class="portfolio-img">
+                    <img src="img/portfolio/3.jpg" alt="">
+                </div>
+            </div>
+
+
+            <div class="portfolio-box mix web">
+                <div class="portfolio-content">
+                    <h3>Web Development</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, soluta.</p>
+                    <a href="#" class="readMore">Explore More</a>
+                </div>
+                <div class="portfolio-img">
+                    <img src="img/portfolio/4.jpg" alt="">
+                </div>
+            </div>
+
+            <div class="portfolio-box mix uiux">
+                <div class="portfolio-content">
+                    <h3>UI/UX Design</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, soluta.</p>
+                    <a href="#" class="readMore">Explore More</a>
+                </div>
+                <div class="portfolio-img">
+                    <img src="img/portfolio/5.jpg" alt="">
+                </div>
+            </div>
+
+            <div class="portfolio-box mix branding">
+                <div class="portfolio-content">
+                    <h3>Web Development</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, soluta.</p>
+                    <a href="#" class="readMore">Explore More</a>
+                </div>
+                <div class="portfolio-img">
+                    <img src="img/portfolio/6.jpg" alt="">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="blog" id="blog">
+        <div class="main-text">
+            <h2 class="heading">Blog</h2>
+            <span>Latest News & Post</span>
+        </div>
+
+        <div class="blog-box swiper mySwiper">
+            <div class="cards swiper-wrapper">
+                <div class="card swiper-slide">
+                    <div class="card-top">
+                        <img src="img/blog/1.jpg" alt="">
+                    </div>
+                    <div class="card-info">
+                        <h2>Mobile App Landing Page</h2>
+                        <span class="date">Sunday, Jan 14, 2023</span>
+                        <p class="excerpt">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, illo.
+                        </p>
+                        <a href="#" class="readMore">Explore More</a>
+                    </div>
+                </div>
+
+                <div class="card swiper-slide">
+                    <div class="card-top">
+                        <img src="img/blog/2.jpg" alt="">
+                    </div>
+                    <div class="card-info">
+                        <h2>Mobile App Landing Page</h2>
+                        <span class="date">Sunday, Jan 14, 2023</span>
+                        <p class="excerpt">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, illo.
+                        </p>
+                        <a href="#" class="readMore">Explore More</a>
+                    </div>
+                </div>
+
+                <div class="card swiper-slide">
+                    <div class="card-top">
+                        <img src="img/blog/3.jpg" alt="">
+                    </div>
+                    <div class="card-info">
+                        <h2>Mobile App Landing Page</h2>
+                        <span class="date">Sunday, Jan 14, 2023</span>
+                        <p class="excerpt">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, illo.
+                        </p>
+                        <a href="#" class="readMore">Explore More</a>
+                    </div>
+                </div>
+
+                <div class="card swiper-slide">
+                    <div class="card-top">
+                        <img src="img/blog/4.jpg" alt="">
+                    </div>
+                    <div class="card-info">
+                        <h2>Mobile App Landing Page</h2>
+                        <span class="date">Sunday, Jan 14, 2023</span>
+                        <p class="excerpt">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, illo.
+                        </p>
+                        <a href="#" class="readMore">Explore More</a>
+                    </div>
+                </div>
+
+                <div class="card swiper-slide">
+                    <div class="card-top">
+                        <img src="img/blog/5.jpg" alt="">
+                    </div>
+                    <div class="card-info">
+                        <h2>Mobile App Landing Page</h2>
+                        <span class="date">Sunday, Jan 14, 2023</span>
+                        <p class="excerpt">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, illo.
+                        </p>
+                        <a href="#" class="readMore">Explore More</a>
+                    </div>
+                </div>
+
+                <div class="card swiper-slide">
+                    <div class="card-top">
+                        <img src="img/blog/6.jpg" alt="">
+                    </div>
+                    <div class="card-info">
+                        <h2>Mobile App Landing Page</h2>
+                        <span class="date">Sunday, Jan 14, 2023</span>
+                        <p class="excerpt">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, illo.
+                        </p>
+                        <a href="#" class="readMore">Explore More</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+
+        <div class="showcase">
+            <img src="shapes/ring.png" class="ring">
+            <img src="shapes/second-circle.png" class="second-circle">
+            <img src="shapes/circle.png" class="circle">
+            <img src="shapes/half-ring.png" class="half-ring">
+        </div>
+
+    </section>
+
+    <section class="down-box" id="contact">
+        <div class="contactSkills">
+            <div class="contact-info">
+                <div class="main-text">
+                    <h2 class="heading">Contact Me</h2>
+                    <span>get in touch with me</span>
+                </div>
+                <form action="#">
+                    <div class="input-box">
+                        <input type="text" placeholder="First Name">
+                        <input type="text" placeholder="Last Name">
+                    </div>
+                    <input type="email" placeholder="Email">
+                    <input type="text" placeholder="Subject">
+                    <textarea name="#" id="" cols="30" rows="10">
+                    </textarea>
+                    <div class="formBtn">
+                        <button type="submit" class="btn">Send Message</button>
+                    </div>
+                </form>
+            </div>
+            <div class="skills">
+                <div class="container">
+                    <div class="skillBox">
+                        <div class="main-text">
+                            <h2 class="heading">My Skills</h2>
+                            <span>Let Me Help you</span>
+                        </div>
+                        <div class="skill-wrap">
+                            <div class="skill">
+                                <div class="outer-circle">
+                                    <div class="inner-circle">
+                                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="180px" height="180px">
+                                            <defs>
+                                                <linearGradient id="GradientColor">
+                                                <stop offset="0%" stop-color="#e91e63" />
+                                                <stop offset="100%" stop-color="#673ab7" />
+                                                </linearGradient>
+                                            </defs>
+                                                <circle cx="85" cy="85" r="75" stroke-linecap="round" />
+                                       </svg>
+                                       <h2 class="counter">
+                                        <span data-target="89">0</span>%
+                                       </h2>
+                                    </div>
+                                </div>
+                                <div class="sk-title">
+                                    HTML
+                                </div>
+                            </div>
+
+                            <div class="skill">
+                                <div class="outer-circle">
+                                    <div class="inner-circle">
+                                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="180px" height="180px">
+                                            <defs>
+                                                <linearGradient id="GradientColor">
+                                                <stop offset="0%" stop-color="#e91e63" />
+                                                <stop offset="100%" stop-color="#673ab7" />
+                                                </linearGradient>
+                                            </defs>
+                                                <circle cx="85" cy="85" r="75" stroke-linecap="round" />
+                                       </svg>
+                                       <h2 class="counter">
+                                        <span data-target="47">0</span>%
+                                       </h2>
+                                    </div>
+                                </div>
+                                <div class="sk-title">
+                                    CSS
+                                </div>
+                            </div>
+
+
+                            <div class="skill">
+                                <div class="outer-circle">
+                                    <div class="inner-circle">
+                                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="180px" height="180px">
+                                            <defs>
+                                                <linearGradient id="GradientColor">
+                                                <stop offset="0%" stop-color="#e91e63" />
+                                                <stop offset="100%" stop-color="#673ab7" />
+                                                </linearGradient>
+                                            </defs>
+                                                <circle cx="85" cy="85" r="75" stroke-linecap="round" />
+                                       </svg>
+                                       <h2 class="counter">
+                                        <span data-target="56">0</span>%
+                                       </h2>
+                                    </div>
+                                </div>
+                                <div class="sk-title">
+                                    JavaScript
+                                </div>
+                            </div>
+
+
+                            <div class="skill">
+                                <div class="outer-circle">
+                                    <div class="inner-circle">
+                                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="180px" height="180px">
+                                            <defs>
+                                                <linearGradient id="GradientColor">
+                                                <stop offset="0%" stop-color="#e91e63" />
+                                                <stop offset="100%" stop-color="#673ab7" />
+                                                </linearGradient>
+                                            </defs>
+                                                <circle cx="85" cy="85" r="75" stroke-linecap="round" />
+                                       </svg>
+                                       <h2 class="counter">
+                                        <span data-target="19">0</span>%
+                                       </h2>
+                                    </div>
+                                </div>
+                                <div class="sk-title">
+                                    UI/UX Design
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <footer>
+        <p style="font-weight: 500;">© 2024 <span>- LGA FORTECH</span> || Todos os Direitos Reservados.</p>
+    </footer>
+
+    <div id="progress">
+        <span id="progress-value">
+            <i class='bx bxs-chevrons-up' ></i>
+        </span>
+    </div>
+
+    <!-- scroll reveal  -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- Swiper JS -->
+     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- mixitup cdn js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
