@@ -361,6 +361,7 @@ section{
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    margin-bottom: -50px;
 }
 
 .about .about-img{
@@ -465,9 +466,14 @@ section{
 }
 
 .main-text span{
+    font-size: 30px;
     color: var(--font-color);
     font-weight: 200;
     text-transform: uppercase;
+}
+
+.main-text h2 {
+    font-size: 40px;
 }
 
 .allServices{
@@ -905,10 +911,12 @@ form .btn{
             display: flex;
             align-items: center;
             margin-right: 200px;
+            margin-left: -70px;
+            justify-self: start;
             flex-direction: row;
             margin-top: 40px;
-            width: 500px;
-            height: 500px;
+            width: 400px;
+            height: 400px;
         }
     }
 
@@ -1178,7 +1186,43 @@ footer{
 }
 
 @media(max-width:768px){
+
+.contato_bao {
+   display: flex; 
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   
+   img {
+    width: 350px;
+    height: 350px;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+   }
+
+   .text-box {
+    margin-left: 0px;
+    justify-self: start;
+    justify-content: start;
+
+    span {
+        font-size: 20px;
+        font-style: italic;
+    }
+
+    h3 {
+        font-size: 20px;
+        /* margin-bottom: 20px; */
+    }
+
+   }
+}
+
+
+
     /* .proposal{
+    
         display: none;
     } */
     .menu-icon .bar,.menu-icon::after,.menu-icon::before{
@@ -1272,10 +1316,17 @@ footer{
    }
 }
 
+.services {
+    margin-top: 90px;
+}
 
-
+.about-img {
+    margin-top: 30px;
+    margin: 20px;
+}
 
     .service_title {
+        margin-top: 30px;
         width: 320px;
         font-size: 2px;
 
@@ -1288,15 +1339,14 @@ footer{
     }
 
     .profile_service {
+        margin-left: 100px;
         display: flex;
         flex-direction: column;
-        width: 320px;
-        margin-left: 50px;
 
         img {
+            width: 330px;
+            height: 330px;
             margin-top: 40px;
-            width: 300px;
-            height: 300px;
         }
     }
 
