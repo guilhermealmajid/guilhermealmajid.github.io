@@ -287,9 +287,12 @@ section{
 }
 
 .img-hero img{
+    border-radius: 50%;
     position: relative;
-    width: 400px;
-    height: auto;
+    width: 390px;
+    height: 390px;
+    margin-top: 77px;
+    margin-left: 5px;
     z-index: 10;
 }
 
@@ -549,7 +552,33 @@ section{
     cursor: pointer;              
 }
 
-.proposal{
+.contato_bao {
+   display: flex; 
+   justify-content: space-between;
+   
+   img {
+    margin-right: 60px;
+   }
+
+   .text-box {
+
+    margin-left: 50px;
+
+    span {
+        font-size: 40px;
+    font-style: italic;
+    }
+
+    h3 {
+        font-size: 40px;
+        margin-bottom: 20px;
+    }
+
+   }
+}
+
+
+/* .proposal{
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -562,7 +591,7 @@ section{
     border-radius: 10px;
     padding: 0rem 2rem;
     z-index: 1;
-}
+} */
 
 .proposal img{
     width: 40vw;
@@ -572,7 +601,7 @@ section{
 }
 
 .services .text-box span{
-    font-size: 1.2rem;
+    font-size: 80px;
     font-weight: 600;
 }
 
@@ -864,6 +893,39 @@ form .btn{
     border: none;
 }
 
+.profile_service {
+        display: flex;
+        /* flex-direction: row; */
+        width: 320px;
+        margin-left: 180px;
+        margin-bottom: 50px;
+
+        img {
+            justify-content: space-between;
+            display: flex;
+            align-items: center;
+            margin-right: 200px;
+            flex-direction: row;
+            margin-top: 40px;
+            width: 500px;
+            height: 500px;
+        }
+    }
+
+.service_title {
+    top: 50px;
+
+    span {
+        display: flex;
+        text-align: center;
+        flex-direction: row;
+        justify-content: center;
+        font-size: 40px;
+        margin-bottom: 20px;
+    }
+}
+
+
 /* ==================== Skills section css code ============================
 
 .skillBox{
@@ -1091,9 +1153,9 @@ footer{
     .about .about-img .aboutHero{
         width: 100%;
     }
-    .proposal img{
+    /* .proposal img{
         width: 52vw;
-    }
+    } */
     .portfolio-img img{
         width: 100%;
         height: 100%;
@@ -1116,9 +1178,9 @@ footer{
 }
 
 @media(max-width:768px){
-    .proposal{
+    /* .proposal{
         display: none;
-    }
+    } */
     .menu-icon .bar,.menu-icon::after,.menu-icon::before{
         display: block;
     }
@@ -1178,6 +1240,66 @@ footer{
 
 @media(max-width:530px){
 
+.contato_bao {
+   display: flex; 
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   
+   img {
+    width: 350px;
+    height: 350px;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+   }
+
+   .text-box {
+    margin-left: 0px;
+    justify-self: start;
+    justify-content: start;
+
+    span {
+        font-size: 20px;
+        font-style: italic;
+    }
+
+    h3 {
+        font-size: 20px;
+        /* margin-bottom: 20px; */
+    }
+
+   }
+}
+
+
+
+
+    .service_title {
+        width: 320px;
+        font-size: 2px;
+
+        span {
+            font-size: 20px;
+            font-weight: 600;
+            justify-self: center;
+            margin-left: 50px;
+        }
+    }
+
+    .profile_service {
+        display: flex;
+        flex-direction: column;
+        width: 320px;
+        margin-left: 50px;
+
+        img {
+            margin-top: 40px;
+            width: 300px;
+            height: 300px;
+        }
+    }
+
     html{
         font-size: 80%;
     }
@@ -1193,10 +1315,14 @@ footer{
     .rotate-text{
         display: none;
     }
-    .img-hero img{
-        height: 1px;
-        width: 1px;
+    .img-hero {
+
+        img {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
         /* width: 10%; */
+        }
     }
     .text-animate{
         width: 23.8rem;
