@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIZU - GUILHERME ALMEIDA (UBERLANDIA)</title>
+    <title>BIZU - GERADOR SCRIPT NINJA</title>
 </head>
 
 <style>
@@ -31,45 +31,88 @@
             background-position: 0% 50%;
         }
     }
+
+    .menu {
+        display: flex;
+        justify-items: center;
+        gap: 7px 8px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: baseline;
+        width: 80%;
+        margin-bottom: 20px;
+        /* padding: 0 20px; */
+
+    }
+
+    .buttons {
+        /* border: 2px;
+        border-style: solid; */
+        display: flex;
+        gap: 10px;
+    }
+
+    .buttons button {
+        height: 40px;
+        border-radius: 15px;
+        box-shadow: 2px 3px;
+        color: black;
+        background-color: white;
+    }
+
+    .secondary {
+        display: flex;
+        margin-top: -35px;
+        flex-wrap: wrap;
+    }
 </style>
 
-<body >
-    <!-- https://www.fileformat.info/info/unicode/char/1f3b1/browsertest.htm -->
+<body>
     <h2 style="margin-bottom: 30px"><span style="font-size: 48px">🎱 </span>BIZU - GERADOR SCRIPTS <span
             style="font-size: 48px">🎱</span></h2>
-    <label for="lfname" style="margin-right: 10px; font-style: italic">Roteador:</label><select id="change_chart"
-        onclick="updateEquip();" style="margin-right: 10px; font-weight: 700">
-        <option value="0">--SELECIONAR--</option>
-        <option value="1">CISCO</option>
-        <option value="2">HP</option>
-        <option value="3">IAD114</option>
-        <option value="4">ALIGERA</option>
-        <option value="5">FORTNET</option>
-        <option value="6">AG30</option>
+            <a href="puttytelnet://192.168.0.1:23">Abrir Telnet com PuTTY</a>
+            <a href="puttyssh://192.168.100.200:22">Abrir SSH PuTTY</a>
 
-    </select>
 
-    <label id="lbip" style="padding-right: 10px">IP:</label><input type="text" id="text_id" placeholder="Entre com IP">
+    <div class="menu">
+        <!-- https://www.fileformat.info/info/unicode/char/1f3b1/browsertest.htm -->
+        <label for="lfname" style="margin-right: 10px; font-style: italic">Roteador:</label><select id="change_chart"
+            onclick="updateEquip();" style="margin-right: 10px; font-weight: 700">
+            <option value="0">--SELECIONAR--</option>
+            <option value="1">CISCO</option>
+            <option value="2">HP</option>
+            <option value="3">IAD114</option>
+            <option value="4">ALIGERA</option>
+            <option value="5">FORTNET</option>
+            <option value="6">AG30</option>
 
-    <label id="lbvlan">VLAN:</label> <input type="checkbox" id="vlancheck">
+        </select>
 
-    <label id="vlanlb"></label> <input id="vlantext" type="text" placeholder="Marcar CAIXA e digite VLAN"
-        style="width: 200px" />
-    <!--
+        <label id="lbip" style="padding-right: 10px">IP:</label><input type="text" id="text_id"
+            placeholder="Entre com IP">
+
+        <label id="lbvlan">VLAN:</label> <input type="checkbox" id="vlancheck">
+
+        <label id="vlanlb"></label> <input id="vlantext" type="text" placeholder="Marcar CAIXA e digite VLAN"
+            style="width: 200px" />
+        <!--
 
    -<label style="visibility:hidden;" id="lbsip">SIP ACESSO  </label><input style="visibility:hidden;" type="text" id="sipip">
     <label  id="lbramal">ramal  </label><input style="visibility:hidden;"type="text" id="ramalid">
    -->
-    <button accesskey="g" id="button3" onclick="" style="margin-right: 5px; margin-bottom: 30px; border-radius: 20px; width: 100px; height: 40px; margin-left: 10px; box-shadow: 2px
-        3px;color: black; background-color: white;" onmouseover="this.style.backgroundColor='darkgray'"
-        onmouseout="this.style.backgroundColor='white'">Gerar
-        Script!</button>
+        <div class="buttons">
+            <button accesskey="g" id="button3" onclick="" onmouseover="this.style.backgroundColor='darkgray'"
+                onmouseout="this.style.backgroundColor='white'">Gerar
+                Script!</button>
 
-    <button onClick="window.location.reload();"
-        style="border-radius: 20px; font-size: 16px; width: 130px; height: 40px; box-shadow: 2px 3px; color: black; background-color: white;"
-        onmouseover="this.style.backgroundColor='darkgray'" onmouseout="this.style.backgroundColor='white'">Reiniciar
-        Script</button>
+            <button onClick="window.location.reload();" onmouseover="this.style.backgroundColor='darkgray'"
+                onmouseout="this.style.backgroundColor='white'">Reiniciar
+                Script</button>
 
+
+        </div>
+
+    </div>
     <script>
         function updateEquip() {
 
@@ -476,7 +519,7 @@
         }
     </script>
 
-    <div style="display: flex; margin-top: -35px;">
+    <div class="secondary">
         <div>
             <h5 id="baixar" style="line-height: 20px;">Script já copiado pra Memória</br><span>Só Colar no TeraTerminal
                     ou PUTTY</span></h5>
