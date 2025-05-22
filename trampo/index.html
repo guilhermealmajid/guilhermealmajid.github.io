@@ -60,6 +60,22 @@
         background-color: white;
     }
 
+    .buttons a {
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        padding: 1px 7px;
+        border: 2px;
+        border-color: black;
+        border-style: solid;
+        text-decoration: none;
+        border-radius: 15px;
+        box-shadow: 2px 3px;
+        color: black;
+        background-color: white;
+
+    }
+
     .secondary {
         display: flex;
         margin-top: -35px;
@@ -70,8 +86,6 @@
 <body>
     <h2 style="margin-bottom: 30px"><span style="font-size: 48px">🎱 </span>BIZU - GERADOR SCRIPTS <span
             style="font-size: 48px">🎱</span></h2>
-            <a href="puttytelnet://192.168.0.1:23">Abrir Telnet com PuTTY</a>
-            <a href="puttyssh://192.168.100.200:22">Abrir SSH PuTTY</a>
 
 
     <div class="menu">
@@ -108,6 +122,8 @@
             <button onClick="window.location.reload();" onmouseover="this.style.backgroundColor='darkgray'"
                 onmouseout="this.style.backgroundColor='white'">Reiniciar
                 Script</button>
+
+            <a href="index.html" download >Download BIZU</a>
 
 
         </div>
