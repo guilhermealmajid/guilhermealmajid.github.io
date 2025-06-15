@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Run SWF with Ruffle</title>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+</head>
+<body>
+  <h1>Running SWF using Ruffle</h1>
+  <div src="game.png">
+    <object src="game.png" type="application/x-shockwave-flash" data="game.swf" width="800" height="600">
+      <param src=game.png name="movie" value="game.swf" />
+    </object>
+  <div>
+    <object type="application/x-shockwave-flash" data="missionarios.swf" width="800" height="600">
+      <param name="movie" value="missionarios.swf" />
+    </object>
+  </div>
+</body>
+</html>
+
