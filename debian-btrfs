@@ -1,0 +1,40 @@
+### Install Minimal Debian 12 - with btrfs file system ###
+
+Partition Manager create new layout disk like GPT
+efi partition equal 300mb
+/ root partition with btrfs
+
+before of install base system, open terminal side of setup
+df -h
+show mount points /target and /target/boot/efi
+
+umount /target/boot/efi
+umount /target
+
+mount /dev/nvme0n1p2 /mnt
+ls //show @rootfs
+
+mv @rootfs @
+btrfs subvolume create @home
+
+-- After move and create new subvolume btrfs, mount again volume for debian setup
+
+mount -o rw,noatime,space_cache=v2,compress=zstd,sdd,discard=async,subvol=@ /dev/nvme0n1p2 /target
+mkdir -p /target/boot/efi
+mkdir -p /target/home
+mount -o rw,noatime,space_cache=v2,compress=zstd,sdd,discard=async,subvol=@home /dev/nvme0n1p2 /target/home
+mount /dev/nvme0n1p1 /target/boot/efi
+
+-- Editing fstab
+nano or vi /target/etc/fstab
+
+/ btrfs rw,noatime,space_cache=v2,compress=zstd,sdd,discard=async,subvol=@ 0 0
+/home btrfs rw,noatime,space_cache=v2,compress=zstd,sdd,discard=async,subvol=@home 0 0
+
+-- After bootup system debian
+apt install zram-tools micro
+lsblk //show zram0 mounted
+vi /etc/default/zramswap
+
+ALGO=14
+PERCENT=25 //amount total ram
