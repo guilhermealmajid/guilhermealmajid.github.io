@@ -1,0 +1,145 @@
+#!/bin/bash
+set -euo pipefail
+
+# === CONFIGURAÇÃO ===
+TARGET_DISK="/dev/sdX"  # <--- ALTERE para o seu disco alvo, exemplo: /dev/sda
+MOUNT_POINT="/mnt/debian"
+DEBIAN_VERSION="bookworm"
+MIRROR="http://deb.debian.org/debian"
+USERNAME="usuario"      # Nome do usuário comum
+USER_PASSWORD="senha123" # Senha do usuário (mude depois!)
+
+# === SUBVOLUMES PADRÃO (BASEADO NO INSTALLER DO DEBIAN) ===
+declare -A SUBVOLUMES=(
+    ["@"]="/"
+    ["@home"]="/home"
+    ["@var"]="/var"
+    ["@opt"]="/opt"
+    ["@tmp"]="/tmp"
+    ["@srv"]="/srv"
+    ["@root"]="/root"
+    ["@usr_local"]="/usr/local"
+)
+
+EFI_PART="${TARGET_DISK}1"
+BTRFS_PART="${TARGET_DISK}2"
+
+# === LIMPAR DISCO ===
+echo ">> Limpando partições antigas em $TARGET_DISK"
+wipefs -a "$TARGET_DISK"
+
+# === CRIAR PARTIÇÕES GPT + UEFI ===
+echo ">> Criando layout de partições (EFI + Btrfs)"
+parted "$TARGET_DISK" -- mklabel gpt
+parted "$TARGET_DISK" -- mkpart ESP fat32 1MiB 512MiB
+parted "$TARGET_DISK" -- set 1 boot on
+parted "$TARGET_DISK" -- mkpart primary btrfs 512MiB 100%
+
+# === FORMATAR PARTIÇÕES ===
+mkfs.fat -F32 "$EFI_PART"
+mkfs.btrfs -f "$BTRFS_PART"
+
+# === CRIAR SUBVOLUMES BTRFS ===
+echo ">> Criando subvolumes Btrfs"
+mkdir -p "$MOUNT_POINT"
+mount "$BTRFS_PART" "$MOUNT_POINT"
+
+for subvol in "${!SUBVOLUMES[@]}"; do
+    echo "  - Criando subvolume: $subvol"
+    btrfs subvolume create "$MOUNT_POINT/$subvol"
+done
+
+umount "$MOUNT_POINT"
+
+# === MONTAR SUBVOLUMES ===
+echo ">> Montando subvolumes"
+mount -o subvol=@ "$BTRFS_PART" "$MOUNT_POINT"
+
+for subvol in "${!SUBVOLUMES[@]}"; do
+    target="${MOUNT_POINT}${SUBVOLUMES[$subvol]}"
+    [ "$subvol" != "@" ] && mkdir -p "$target" && mount -o subvol="$subvol" "$BTRFS_PART" "$target"
+done
+
+# === MONTAR EFI ===
+mkdir -p "$MOUNT_POINT/boot/efi"
+mount "$EFI_PART" "$MOUNT_POINT/boot/efi"
+
+# === DEBOOTSTRAP ===
+echo ">> Instalando base Debian"
+debootstrap --arch amd64 "$DEBIAN_VERSION" "$MOUNT_POINT" "$MIRROR"
+
+# === FSTAB ===
+echo ">> Criando fstab"
+UUID_BTRFS=$(blkid -s UUID -o value "$BTRFS_PART")
+UUID_EFI=$(blkid -s UUID -o value "$EFI_PART")
+
+{
+echo "# /etc/fstab"
+for subvol in "${!SUBVOLUMES[@]}"; do
+    mountpoint="${SUBVOLUMES[$subvol]}"
+    options="defaults,subvol=$subvol"
+    echo "UUID=$UUID_BTRFS $mountpoint btrfs $options 0 0"
+done
+echo "UUID=$UUID_EFI /boot/efi vfat umask=0077 0 1"
+} > "$MOUNT_POINT/etc/fstab"
+
+# === PREPARAR CHROOT ===
+for dir in /dev /proc /sys /run; do
+    mount --bind "$dir" "$MOUNT_POINT$dir"
+done
+
+# === SCRIPT DENTRO DO CHROOT ===
+cat <<'EOF' > "$MOUNT_POINT/root/chroot-setup.sh"
+#!/bin/bash
+set -e
+
+echo ">> Configurando fuso horário, locale e hostname"
+ln -sf /usr/share/zoneinfo/UTC /etc/localtime
+dpkg-reconfigure -f noninteractive tzdata
+
+echo "debian" > /etc/hostname
+
+echo ">> Locale e console"
+apt update
+apt install -y locales console-setup
+echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+locale-gen
+update-locale LANG=en_US.UTF-8
+
+echo ">> Instalando Kernel, GRUB e utilitários básicos"
+apt install -y linux-image-amd64 systemd-sysv grub-efi-amd64 network-manager sudo vim less dialog
+
+echo ">> Criando usuário comum com sudo"
+useradd -m -s /bin/bash usuario
+echo "usuario:senha123" | chpasswd
+echo "usuario ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/usuario
+
+echo ">> Configurando root"
+echo "root:toor" | chpasswd
+
+echo ">> Instalando GRUB UEFI"
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=debian --recheck
+update-grub
+
+echo ">> Habilitando NetworkManager"
+systemctl enable NetworkManager
+
+echo ">> Criando swapfile padrão (2G)"
+fallocate -l 2G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+echo "/swapfile none swap sw 0 0" >> /etc/fstab
+
+echo ">> Fim da configuração chroot"
+rm /root/chroot-setup.sh
+EOF
+
+chmod +x "$MOUNT_POINT/root/chroot-setup.sh"
+chroot "$MOUNT_POINT" /root/chroot-setup.sh
+
+# === FINAL ===
+echo ">> Limpando mounts"
+umount -lR "$MOUNT_POINT"
+
+echo ">> Debian $DEBIAN_VERSION com Btrfs + UEFI + usuário comum criado com sucesso!"
+

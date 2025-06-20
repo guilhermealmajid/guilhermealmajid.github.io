@@ -1,0 +1,95 @@
+#!/bin/bash
+set -e
+
+### === CONFIGURATION === ###
+TARGET_DISK="/dev/sdX"           # Change this!
+MOUNT_POINT="/mnt/debian"
+DEBIAN_VERSION="bookworm"
+MIRROR="http://deb.debian.org/debian"
+SUBVOLUMES=("@" "@home" "@var" "@opt" "@tmp" "@srv")   # Btrfs subvolumes
+
+### === PARTITION + FORMAT === ###
+echo ">> Wiping and creating new partition table on $TARGET_DISK"
+wipefs -a "$TARGET_DISK"
+parted "$TARGET_DISK" -- mklabel gpt
+parted "$TARGET_DISK" -- mkpart primary 1MiB 100%
+
+echo ">> Formatting as Btrfs"
+mkfs.btrfs -f "${TARGET_DISK}1"
+
+### === MOUNT AND CREATE BTRFS SUBVOLUMES === ###
+echo ">> Mounting target volume to $MOUNT_POINT"
+mkdir -p "$MOUNT_POINT"
+mount "${TARGET_DISK}1" "$MOUNT_POINT"
+
+echo ">> Creating Btrfs subvolumes"
+for subvol in "${SUBVOLUMES[@]}"; do
+    btrfs subvolume create "$MOUNT_POINT/$subvol"
+done
+
+umount "$MOUNT_POINT"
+
+echo ">> Remounting with subvolumes"
+mount -o subvol=@ "${TARGET_DISK}1" "$MOUNT_POINT"
+
+for subvol in "${SUBVOLUMES[@]:1}"; do
+    mkdir -p "$MOUNT_POINT/${subvol#@}"
+    mount -o subvol=$subvol "${TARGET_DISK}1" "$MOUNT_POINT/${subvol#@}"
+done
+
+### === BOOTSTRAP DEBIAN BASE SYSTEM === ###
+echo ">> Bootstrapping Debian $DEBIAN_VERSION"
+debootstrap --arch amd64 "$DEBIAN_VERSION" "$MOUNT_POINT" "$MIRROR"
+
+### === BASIC CONFIGURATION (fstab, hostname, etc.) === ###
+echo ">> Generating /etc/fstab"
+cat <<EOF > "$MOUNT_POINT/etc/fstab"
+# /etc/fstab
+/dev/sda1 / btrfs defaults,subvol=@ 0 0
+/dev/sda1 /home btrfs defaults,subvol=@home 0 0
+/dev/sda1 /var btrfs defaults,subvol=@var 0 0
+/dev/sda1 /opt btrfs defaults,subvol=@opt 0 0
+/dev/sda1 /tmp btrfs defaults,subvol=@tmp 0 0
+/dev/sda1 /srv btrfs defaults,subvol=@srv 0 0
+EOF
+
+echo "debian" > "$MOUNT_POINT/etc/hostname"
+
+### === PREPARE CHROOT ENV === ###
+echo ">> Binding system directories for chroot"
+mount --bind /dev "$MOUNT_POINT/dev"
+mount --bind /proc "$MOUNT_POINT/proc"
+mount --bind /sys "$MOUNT_POINT/sys"
+
+### === INSIDE CHROOT: Minimal Setup === ###
+cat <<'EOL' > "$MOUNT_POINT/root/post-chroot-setup.sh"
+#!/bin/bash
+set -e
+
+echo ">> Setting up timezone"
+ln -sf /usr/share/zoneinfo/UTC /etc/localtime
+dpkg-reconfigure -f noninteractive tzdata
+
+echo ">> Installing basic packages"
+apt update
+apt install -y linux-image-amd64 grub-pc sudo vim
+
+echo ">> Setting root password"
+echo "root:toor" | chpasswd
+
+echo ">> Installing GRUB"
+grub-install /dev/sda
+update-grub
+EOL
+
+chmod +x "$MOUNT_POINT/root/post-chroot-setup.sh"
+
+echo ">> Chrooting into new system"
+chroot "$MOUNT_POINT" /root/post-chroot-setup.sh
+
+### === CLEANUP === ###
+echo ">> Unmounting target filesystem"
+umount -lR "$MOUNT_POINT"
+
+echo ">> DONE. Debian minimal install is ready on $TARGET_DISK"
+
