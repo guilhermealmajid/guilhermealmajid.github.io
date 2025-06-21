@@ -1,57 +1,53 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
-DISK="/dev/sdX"  # <--- Altere para o disco correto
+# === CONFIGURAÇÕES ===
+DISK="/dev/sdX"           # Altere para /dev/sda, /dev/vda etc.
 EFI="${DISK}1"
 ROOT="${DISK}2"
 MNT="/mnt/debian"
-HOST="debian-btrfs"
 DIST="bookworm"
+HOST="debian-basic"
 USER="usuario"
-PASS="senha123"
+PASS="senha123"           # Senha root e usuário comum
 
-# 1. Particionamento
+# === PARTICIONAMENTO GPT ===
 wipefs -a "$DISK"
 parted -s "$DISK" mklabel gpt
 parted -s "$DISK" mkpart ESP fat32 1MiB 513MiB
 parted -s "$DISK" set 1 esp on
-parted -s "$DISK" mkpart ROOT btrfs 513MiB 100%
+parted -s "$DISK" mkpart ROOT ext4 513MiB 100%
 
-# 2. Formatação
+# === FORMATAÇÃO ===
 mkfs.fat -F32 "$EFI"
-mkfs.btrfs -f "$ROOT"
+mkfs.ext4 -F "$ROOT"
 
-# 3. Montagem inicial e subvolumes
+# === MONTAGEM ===
 mkdir -p "$MNT"
 mount "$ROOT" "$MNT"
-
-for SUB in @ @home @var @snapshots; do
-  btrfs subvolume create "$MNT/$SUB"
-done
-
-umount "$MNT"
-
-# 4. Montagem real
-mount -o subvol=@,compress=zstd,noatime "$ROOT" "$MNT"
-for DIR in home var .snapshots; do
-  mkdir -p "$MNT/$DIR"
-  mount -o subvol=@$DIR,compress=zstd,noatime "$ROOT" "$MNT/$DIR"
-done
-
 mkdir -p "$MNT/boot/efi"
 mount "$EFI" "$MNT/boot/efi"
 
-# 5. Instalação mínima
+# === INSTALAÇÃO DO SISTEMA BASE ===
 debootstrap "$DIST" "$MNT" http://deb.debian.org/debian
 
-# 6. Bind mounts
-mount --bind /dev "$MNT/dev"
-mount --bind /proc "$MNT/proc"
-mount --bind /sys "$MNT/sys"
+# === MONTAGENS DO SISTEMA ===
+for dir in dev proc sys; do mount --bind /$dir "$MNT/$dir"; done
 
-# 7. Configuração dentro do chroot
+# === PREPARAÇÃO: UUIDs para fstab ===
+UUID_ROOT=$(blkid -s UUID -o value "$ROOT")
+UUID_EFI=$(blkid -s UUID -o value "$EFI")
+
+cat <<EOF > "$MNT/etc/fstab"
+UUID=$UUID_ROOT / ext4 defaults 0 1
+UUID=$UUID_EFI  /boot/efi vfat umask=0077 0 1
+EOF
+
+# === CHROOT E CONFIGURAÇÃO ===
 chroot "$MNT" /bin/bash <<EOF
+set -e
+
 echo "$HOST" > /etc/hostname
 echo "127.0.1.1 $HOST" >> /etc/hosts
 
@@ -59,24 +55,37 @@ ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 dpkg-reconfigure -f noninteractive tzdata
 
 apt update
-apt install -y linux-image-amd64 btrfs-progs grub-efi-amd64 network-manager sudo \
-               systemd-timesyncd zram-tools
+apt install -y linux-image-amd64 grub-efi-amd64 sudo network-manager systemd-timesyncd expect
 
 systemctl enable NetworkManager
 systemctl enable systemd-timesyncd
-systemctl enable zramswap
 
-# Root
-echo "root:$PASS" | chpasswd
+# === SENHA ROOT COM PASSWD (expect) ===
+expect <<EOL
+spawn passwd root
+expect "New password:"
+send "$PASS\r"
+expect "Retype new password:"
+send "$PASS\r"
+expect eof
+EOL
 
-# Usuário comum com sudo
+# === USUÁRIO PADRÃO COM PASSWD (expect) ===
 useradd -m -s /bin/bash "$USER"
-echo "$USER:$PASS" | chpasswd
 usermod -aG sudo "$USER"
 
-# GRUB
+expect <<EOL
+spawn passwd "$USER"
+expect "New password:"
+send "$PASS\r"
+expect "Retype new password:"
+send "$PASS\r"
+expect eof
+EOL
+
+# === INSTALAR E CONFIGURAR GRUB UEFI ===
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=debian
 grub-mkconfig -o /boot/grub/grub.cfg
 EOF
 
-echo "✅ Instalação concluída com ZRAM como swap. Pode reiniciar o sistema."
+echo "✅ Debian básico instalado com EXT4, GRUB, usuário e fstab atualizado."
