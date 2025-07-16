@@ -1,0 +1,12 @@
+### Regex vim ###
+
+# Regex formatar script todas linha adicionar aspas
+# duplas e acrescentar +"\n"+ no final de cada linha
+:%s/\(.*\)/"\1"+"\\n"+
+
+# :%s/\(content\)/	//localiza conteudo e apaga ou depois do / substitui
+# :%s/\("".*\)/ 	//.* tudo depois
+
+# Apaga linha em branco - empty
+# ^ indica inicio linha e $ final linha e /d apagar
+:g/^$/d
