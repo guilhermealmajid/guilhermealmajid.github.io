@@ -1,0 +1,19 @@
+"config"+"\n"+
+"! ### set user EBT"+"\n"+
+"login user EBT password"+"\n"+
+"PRO1AN"+"\n"+
+"PRO1AN"+"\n"+
+"login user EBT privilege_level admin"+"\n"+
+"! ### set network"+"\n"+
+"network telnet enabled yes"+"\n"+
+"network defaultgw 200.179.114.105"+"\n"+
+"network ethernet1 mode autoneg"+"\n"+
+"network ethernet1 ip type static"+"\n"+
+"network ethernet1 ip address 200.179.114.106"+"\n"+
+"network ethernet1 ip netmask 255.255.255.252"+"\n"+
+"! ### disable firewall"+"\n"+
+"firewall state disabled"+"\n"+
+"! ### exit and save"+"\n"+
+"exit"+"\n"+
+"config apply"+"\n"+
+"config save"+"\n"+
