@@ -19,3 +19,15 @@
 
 ### melhor para quebrar linhas do gerador de scripts ###
 :%s/\"\\n" +/"\\n" +\r/g
+
+### VIM ###
+:vertical resize 57 //ajusta legal divisao 
+:resize 0 ou 60 //horizontal
+
+tclsh
+puts [open nvram:zera.cfg w+] {
+version 1.0
+!
+end
+}
+conf replace nvram:zera.cfg force
