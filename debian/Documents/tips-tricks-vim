@@ -13,3 +13,6 @@
 
 ### Trips and Tricks aqui e pesquisar entre \ / sacou!?  apos isso manda um \r para quebrar linha
 :%s/\"\\n" + "!" + "\\n" + /\r/g
+
+### Ajeitando o restante do codigo
+:%s/\"\\n" +/\r/g
