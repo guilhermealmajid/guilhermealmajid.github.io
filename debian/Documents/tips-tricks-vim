@@ -10,3 +10,5 @@
 # Apaga linha em branco - empty
 # ^ indica inicio linha e $ final linha e /d apagar
 :g/^$/d
+
+:s/\"\\n" + "!" + "\\n" + /\r/g
