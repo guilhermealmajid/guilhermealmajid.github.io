@@ -31,3 +31,6 @@ version 1.0
 end
 }
 conf replace nvram:zera.cfg force
+
+### habilita servidor http ### so baixar aquivo no laptop pro equipamento.
+sudo python3 -m http.server 80
