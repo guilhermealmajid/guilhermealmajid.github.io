@@ -16,3 +16,6 @@
 
 ### Ajeitando o restante do codigo
 :%s/\"\\n" +/\r/g
+
+### melhor para quebrar linhas do gerador de scripts ###
+:%s/\"\\n" +/"\\n" +\r/g
