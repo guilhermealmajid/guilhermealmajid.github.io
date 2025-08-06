@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>BIZU - GERADOR SCRIPT NINJA</title>
   <style>
     body {
@@ -27,12 +27,17 @@
     }
     /* Frase inicial */
     .galaxy-text {
-      font-size: 56px;
-      font-weight: bold;
-      text-shadow: 0 0 20px #feda4a, 0 0 40px #feda4a, 0 0 60px #feda4a;
+      font-size: 96px;  /* tamanho gigante */
+      font-weight: 900;
+      text-shadow:
+        0 0 30px #feda4a,
+        0 0 60px #feda4a,
+        0 0 90px #feda4a;
       color: #feda4a;
       opacity: 0;
       animation: fadeInText 5s ease-in forwards;
+      text-align: center;
+      width: 100%;
     }
     @keyframes fadeInText {
       0% { opacity: 0; }
@@ -43,15 +48,28 @@
       position: relative;
       height: 100%;
       width: 90%;
-      font-size: 32px;
+      font-size: 56px;
+      font-weight: bold;
       text-align: center;
-      line-height: 1.4;
+      line-height: 1.3;
       transform-origin: 50% 100%;
       transform: perspective(400px) rotateX(25deg);
       color: #feda4a;
+      text-shadow: 0 0 25px #feda4a, 0 0 50px #feda4a, 0 0 75px #feda4a;
       animation: crawl 35s linear forwards;
-      animation-delay: 6s; /* começa após a frase */
+      animation-delay: 6s;
       opacity: 0;
+    }
+    .star-wars p {
+      font-size: 166px;
+      font-weight: 900;
+      color: #feda4a;
+      text-shadow:
+        0 0 40px #feda4a,
+        0 0 80px #feda4a,
+        0 0 120px #feda4a;
+      line-height: 1.4; /* espaçamento maior */
+      margin: 0;
     }
     @keyframes crawl {
       0% { top: 100%; opacity: 1; }
@@ -68,6 +86,7 @@
       background: black;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       z-index: 1000;
       opacity: 0;
     }
@@ -116,6 +135,28 @@
       margin-top: 10px;
       font-weight: bold;
       text-shadow: 0 0 5px #ff0000;
+    }
+    /* Botão ativar música */
+    #btnMusic {
+      background: linear-gradient(90deg, #ffcc00, #ffaa00);
+      color: black;
+      font-weight: bolder;
+      font-size: 22px;
+      padding: 15px 40px;
+      margin: 15px 0 40px;
+      border-radius: 25px;
+      box-shadow: 0 0 30px #ffaa00, 0 0 50px #ffcc00 inset;
+      cursor: pointer;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      user-select: none;
+      transition: transform 0.2s ease;
+    }
+    #btnMusic:hover {
+      transform: scale(1.1);
+      background: linear-gradient(90deg, #ffaa00, #ffcc00);
+      color: #222;
     }
     /* Conteúdo */
     #conteudo {
@@ -203,9 +244,9 @@
   </style>
 </head>
 <body>
-  <!-- Música épica -->
-  <audio id="swMusic" autoplay>
-    <source src="https://ia800905.us.archive.org/11/items/StarWarsThemeSongByJohnWilliams/StarWarsThemeSongByJohnWilliams.mp3" type="audio/mpeg">
+  <!-- Música épica sem autoplay -->
+  <audio id="swMusic" loop>
+    <source src="https://ia800905.us.archive.org/11/items/StarWarsThemeSongByJohnWilliams/StarWarsThemeSongByJohnWilliams.mp3" type="audio/mpeg" />
   </audio>
 
   <!-- Intro -->
@@ -218,10 +259,11 @@
 
   <!-- Tela de Login -->
   <div id="loginScreen">
+    <button id="btnMusic" onclick="tocarMusica()">🎵 Ativar Música Jedi</button>
     <div class="login-box">
       <h2>🌌 Login Jedi</h2>
-      <input type="text" id="usuario" placeholder="Usuário">
-      <input type="password" id="senha" placeholder="Senha">
+      <input type="text" id="usuario" placeholder="Usuário" />
+      <input type="password" id="senha" placeholder="Senha" />
       <button onclick="fazerLogin()">Entrar</button>
       <p id="erro">❌ Usuário ou senha incorretos!</p>
     </div>
@@ -243,17 +285,17 @@
         <option>DATACOM</option>
       </select>
       <label>IP:</label>
-      <input type="text" placeholder="Entre com IP">
+      <input type="text" placeholder="Entre com IP" />
       <label>VLAN:</label>
-      <input type="checkbox">
-      <input type="text" placeholder="Marcar CAIXA e digite VLAN">
+      <input type="checkbox" />
+      <input type="text" placeholder="Marcar CAIXA e digite VLAN" />
       <div>
         <button>Gerar Script!</button>
         <button>Reiniciar Script</button>
       </div>
     </div>
     <div class="secondary">
-      <h5>Script já copiado pra Memória<br><span>Só Colar no TeraTerminal ou PUTTY</span></h5>
+      <h5>Script já copiado pra Memória<br /><span>Só Colar no TeraTerminal ou PUTTY</span></h5>
       <textarea cols="60" rows="17"></textarea>
       <button>COPIAR!</button>
       <h5>Dicas e Truques!</h5>
@@ -270,9 +312,17 @@
       loginScreen.style.display = "flex";
       loginScreen.style.animation = "fadeInSlow 3s forwards";
       document.querySelector(".login-box").style.animation = "fadeInSlow 4s forwards";
-      // Para música após intro
-      document.getElementById("swMusic").pause();
-    }, 38000);
+    }, 23000);
+
+    function tocarMusica() {
+      const musica = document.getElementById("swMusic");
+      musica.play().then(() => {
+        // Sucesso, esconde botão
+        document.getElementById("btnMusic").style.display = "none";
+      }).catch(() => {
+        alert("Para ativar o som, por favor toque o botão novamente.");
+      });
+    }
 
     function fazerLogin() {
       const usuario = document.getElementById("usuario").value;
@@ -291,9 +341,9 @@
       } else {
         const erro = document.getElementById("erro");
         erro.style.display = "block";
-        setTimeout(() => erro.style.display = "none", 3500);
+        setTimeout(() => (erro.style.display = "none"), 3500);
       }
     }
   </script>
 </body>
-  </html>
+</html>
