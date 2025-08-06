@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>BIZU - GERADOR SCRIPT NINJA</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: #feda4a;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+    /* Intro container */
+    #intro {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 2000;
+    }
+    /* Frase inicial */
+    .galaxy-text {
+      font-size: 56px;
+      font-weight: bold;
+      text-shadow: 0 0 20px #feda4a, 0 0 40px #feda4a, 0 0 60px #feda4a;
+      color: #feda4a;
+      opacity: 0;
+      animation: fadeInText 5s ease-in forwards;
+    }
+    @keyframes fadeInText {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    /* Crawl estilo Star Wars */
+    .star-wars {
+      position: relative;
+      height: 100%;
+      width: 90%;
+      font-size: 32px;
+      text-align: center;
+      line-height: 1.4;
+      transform-origin: 50% 100%;
+      transform: perspective(400px) rotateX(25deg);
+      color: #feda4a;
+      animation: crawl 35s linear forwards;
+      animation-delay: 6s; /* começa após a frase */
+      opacity: 0;
+    }
+    @keyframes crawl {
+      0% { top: 100%; opacity: 1; }
+      100% { top: -300%; opacity: 1; }
+    }
+    /* Tela de Login */
+    #loginScreen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+    }
+    .login-box {
+      background: rgba(0,0,0,0.85);
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff inset;
+      width: 300px;
+      opacity: 0;
+    }
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #00f7ff;
+      text-shadow: 0 0 10px #00f7ff;
+    }
+    .login-box input, .login-box button {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background: #111;
+      color: #feda4a;
+      box-shadow: inset 0 0 5px #00f7ff;
+      font-size: 16px;
+    }
+    .login-box button {
+      background: linear-gradient(90deg, #00f7ff, #0077ff);
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00f7ff, 0 0 20px #0077ff;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .login-box button:hover {
+      background: linear-gradient(90deg, #0077ff, #00f7ff);
+      color: white;
+      transform: scale(1.05);
+    }
+    .login-box p {
+      color: red;
+      display: none;
+      margin-top: 10px;
+      font-weight: bold;
+      text-shadow: 0 0 5px #ff0000;
+    }
+    /* Conteúdo */
+    #conteudo {
+      display: none;
+      opacity: 0;
+    }
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      color: #00f7ff;
+      text-shadow: 0 0 15px #00f7ff;
+    }
+    .menu, .secondary {
+      background: rgba(0,0,0,0.9);
+      border: 2px solid #00f7ff;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 1100px;
+      box-shadow: 0 0 20px #00f7ff;
+    }
+    label {
+      font-weight: bold;
+      margin-right: 10px;
+      color: #feda4a;
+    }
+    select, input[type="text"], textarea {
+      background: #111;
+      border: none;
+      border-radius: 8px;
+      color: #feda4a;
+      padding: 8px 12px;
+      margin: 8px 0;
+      font-size: 16px;
+      box-shadow: inset 0 0 5px #00f7ff;
+    }
+    button {
+      background: linear-gradient(90deg, #00f7ff, #0077ff);
+      border: none;
+      border-radius: 10px;
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00f7ff, 0 0 30px #0077ff;
+    }
+    button:hover {
+      transform: scale(1.08);
+      background: linear-gradient(90deg, #0077ff, #00f7ff);
+      color: white;
+    }
+    a {
+      color: #00f7ff;
+      text-decoration: none;
+      font-weight: bold;
+      text-shadow: 0 0 8px #00f7ff;
+    }
+    textarea {
+      width: 100%;
+      resize: none;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    h5 {
+      color: #00f7ff;
+      text-shadow: 0 0 8px #00f7ff;
+    }
+    #dateLabel {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+    @keyframes fadeInSlow {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeOutSlow {
+      from { opacity: 1; }
+      to { opacity: 0; visibility: hidden; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Música épica -->
+  <audio id="swMusic" autoplay>
+    <source src="https://ia800905.us.archive.org/11/items/StarWarsThemeSongByJohnWilliams/StarWarsThemeSongByJohnWilliams.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Intro -->
+  <div id="intro">
+    <span class="galaxy-text">Numa galáxia muito distante...</span>
+    <div class="star-wars">
+      <p>Prepare-se para a Força Jedi em ação!</p>
+    </div>
+  </div>
+
+  <!-- Tela de Login -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <h2>🌌 Login Jedi</h2>
+      <input type="text" id="usuario" placeholder="Usuário">
+      <input type="password" id="senha" placeholder="Senha">
+      <button onclick="fazerLogin()">Entrar</button>
+      <p id="erro">❌ Usuário ou senha incorretos!</p>
+    </div>
+  </div>
+
+  <!-- Conteúdo -->
+  <div id="conteudo">
+    <h2>🎱 BIZU - GERADOR SCRIPTS 🎱</h2>
+    <div class="menu">
+      <label for="lfname">Roteador:</label>
+      <select id="change_chart">
+        <option>--SELECIONAR--</option>
+        <option>CISCO</option>
+        <option>HP</option>
+        <option>IAD114</option>
+        <option>ALIGERA</option>
+        <option>FORTNET</option>
+        <option>AG30</option>
+        <option>DATACOM</option>
+      </select>
+      <label>IP:</label>
+      <input type="text" placeholder="Entre com IP">
+      <label>VLAN:</label>
+      <input type="checkbox">
+      <input type="text" placeholder="Marcar CAIXA e digite VLAN">
+      <div>
+        <button>Gerar Script!</button>
+        <button>Reiniciar Script</button>
+      </div>
+    </div>
+    <div class="secondary">
+      <h5>Script já copiado pra Memória<br><span>Só Colar no TeraTerminal ou PUTTY</span></h5>
+      <textarea cols="60" rows="17"></textarea>
+      <button>COPIAR!</button>
+      <h5>Dicas e Truques!</h5>
+      <textarea cols="60" rows="17"></textarea>
+    </div>
+    <label id="dateLabel">2025 © - Guilherme Almeida [Uberlândia-MG]. Todos Direitos Reservados.</label>
+  </div>
+
+  <script>
+    // Mostra login após o crawl
+    setTimeout(() => {
+      document.getElementById("intro").style.display = "none";
+      const loginScreen = document.getElementById("loginScreen");
+      loginScreen.style.display = "flex";
+      loginScreen.style.animation = "fadeInSlow 3s forwards";
+      document.querySelector(".login-box").style.animation = "fadeInSlow 4s forwards";
+      // Para música após intro
+      document.getElementById("swMusic").pause();
+    }, 38000);
+
+    function fazerLogin() {
+      const usuario = document.getElementById("usuario").value;
+      const senha = document.getElementById("senha").value;
+      const userEncoded = "amVkaQ=="; // jedi
+      const passEncoded = "Zm9yY2ExMjM="; // forca123
+      if (usuario === atob(userEncoded) && senha === atob(passEncoded)) {
+        const loginScreen = document.getElementById("loginScreen");
+        const conteudo = document.getElementById("conteudo");
+        loginScreen.style.animation = "fadeOutSlow 2s forwards";
+        setTimeout(() => {
+          loginScreen.style.display = "none";
+          conteudo.style.display = "block";
+          conteudo.style.animation = "fadeInSlow 3s forwards";
+        }, 2000);
+      } else {
+        const erro = document.getElementById("erro");
+        erro.style.display = "block";
+        setTimeout(() => erro.style.display = "none", 3500);
+      }
+    }
+  </script>
+</body>
+</html>
