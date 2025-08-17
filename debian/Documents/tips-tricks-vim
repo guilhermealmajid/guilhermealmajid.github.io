@@ -10,6 +10,7 @@
 # Apaga linha em branco - empty
 # ^ indica inicio linha e $ final linha e /d apagar
 :g/^$/d
+:g/^ *$/d
 
 ### Trips and Tricks aqui e pesquisar entre \ / sacou!?  apos isso manda um \r para quebrar linha
 :%s/\"\\n" + "!" + "\\n" + /\r/g
