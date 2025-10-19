@@ -1,0 +1,19 @@
+### Add repository drivers ###
+### Este driver deu certo na minha Distro Ubuntu 25.10 Questing ###
+
+sudo add-apt-repository universe
+software-properties-common
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+
+sudo apt install ubuntu-drivers-common
+
+ubuntu-drivers devices
+sudo apt install nvidia-driver-580-open
+sudo apt install nvidia-prime
+sudo apt install nvidia-cuda-dev 
+
+
+### Forçar Nvidia deu certo - Regenera Initramfs ###
+sudo prime-select nvidia
+
