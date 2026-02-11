@@ -14,6 +14,9 @@ Lg21128080$
 lgafortech
 lga220809
 
+laylaguilherme220809@gmail.com
+Lg21128080$
+
 #Camera Yoosee
 ativacaoulamg@gmail.com
 Lg21128080$
