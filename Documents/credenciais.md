@@ -28,3 +28,15 @@ Lg21128080
 #acesso.gov.br
 05343115632
 Lg21128080$$
+
+#Novo Conectado
+Z057054
+rd4VbU$9ztvz
+
+#registro.br
+05343115632
+lga220809
+
+#http://200.251.113.76/rpedro/atvweb-login/
+z057054
+Claro21
