@@ -40,3 +40,7 @@ lga220809
 #http://200.251.113.76/rpedro/atvweb-login/
 z057054
 Claro21
+
+#Github
+guilhermealmeida@gmail.com
+Lg21128080$$
